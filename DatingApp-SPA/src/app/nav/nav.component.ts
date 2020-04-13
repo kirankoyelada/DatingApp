@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
   model: any = {};
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private alterify: AlertifyService,
     private router:Router
   ) {}

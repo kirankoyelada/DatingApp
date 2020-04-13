@@ -12,10 +12,21 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MemberListComponent } from './MemberList/MemberList.component';
+import { MemberListComponent } from './Members/MemberList/MemberList.component';
 import { ListsComponent } from './Lists/Lists.component';
 import { MessagesComponent } from './Messages/Messages.component';
+import { MemberCardComponent } from './Members/MemberCard/MemberCard.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { MemberDetailComponent } from './Members/member-detail/member-detail.component';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+
+export function tokenGetter(){
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -27,6 +38,8 @@ import { MessagesComponent } from './Messages/Messages.component';
     MemberListComponent,
     ListsComponent,
     MessagesComponent,
+    MemberCardComponent,
+    MemberDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +47,19 @@ import { MessagesComponent } from './Messages/Messages.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoues),
+    NgxGalleryModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter:tokenGetter,
+        whitelistedDomains:['localhost:5000'],
+        blacklistedRoutes:['localhost:5000/auth']
+      }
+    }),
   ],
-  providers: [ErrorInterceptorProvider],
+  providers: [ErrorInterceptorProvider,MemberDetailResolver,MemberListResolver],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

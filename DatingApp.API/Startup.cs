@@ -37,7 +37,10 @@ namespace DatingApp.API
             services.AddAutoMapper(typeof(UserRepo).Assembly);
             services.AddScoped<IAuthRepo,AuthRepo>();
             services.AddScoped<IUserRepo,UserRepo>();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(options=>{
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                     .AddJwtBearer(token=>{
                         token.TokenValidationParameters=new TokenValidationParameters
                         {
