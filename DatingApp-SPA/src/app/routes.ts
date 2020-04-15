@@ -7,6 +7,9 @@ import { AuthGuard } from './_guards/auth.guard';
 import { MemberDetailComponent } from './Members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { MemberEditComponent } from './Members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { UnsavedChanges } from './_guards/unsaved-changes.guard';
 
 export const appRoues: Routes = [
   {
@@ -29,6 +32,12 @@ export const appRoues: Routes = [
         component: MemberDetailComponent,
         canActivate: [AuthGuard],
         resolve: { user: MemberDetailResolver },
+      },
+      {
+        path:'member/edit',
+        component:MemberEditComponent,
+        resolve:{user:MemberEditResolver},
+        canDeactivate:[UnsavedChanges]
       },
       {
         path: 'messages',
