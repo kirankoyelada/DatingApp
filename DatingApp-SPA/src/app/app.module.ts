@@ -23,6 +23,10 @@ import { MemberDetailComponent } from './Members/member-detail/member-detail.com
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { MemberEditComponent } from './Members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { AuthGuard } from './_guards/auth.guard';
+import { UnsavedChanges } from './_guards/unsaved-changes.guard';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
@@ -39,7 +43,8 @@ export function tokenGetter(){
     ListsComponent,
     MessagesComponent,
     MemberCardComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,7 @@ export function tokenGetter(){
       }
     }),
   ],
-  providers: [ErrorInterceptorProvider,MemberDetailResolver,MemberListResolver],
+  providers: [ErrorInterceptorProvider,AuthGuard,UnsavedChanges, MemberDetailResolver,MemberListResolver,MemberEditResolver],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
