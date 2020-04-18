@@ -34,6 +34,7 @@ namespace DatingApp.API
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(UserRepo).Assembly);
             services.AddScoped<IAuthRepo,AuthRepo>();
             services.AddScoped<IUserRepo,UserRepo>();
