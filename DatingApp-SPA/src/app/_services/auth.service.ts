@@ -23,6 +23,7 @@ export class AuthService {
         const user = response;
         if (user) {
           this.currentUser=user;
+          localStorage.setItem('user',JSON.stringify(user));
           localStorage.setItem('token', user.token);
           localStorage.setItem('imageUrl',user.userInfo);
           this.decodedToken=this.jwtHelper.decodeToken(user.token);
