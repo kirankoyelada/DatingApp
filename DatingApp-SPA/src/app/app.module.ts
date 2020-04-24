@@ -33,6 +33,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimeagoModule } from 'ngx-timeago';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { ListResolver } from './_resolvers/list.resolver';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
@@ -78,7 +79,7 @@ export function tokenGetter(){
       }
     }),
   ],
-  providers: [ErrorInterceptorProvider,AuthGuard,UnsavedChanges, MemberDetailResolver,MemberListResolver,MemberEditResolver],
+  providers: [ErrorInterceptorProvider,AuthGuard,UnsavedChanges, MemberDetailResolver,MemberListResolver,MemberEditResolver,ListResolver],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
